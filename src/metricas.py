@@ -1,4 +1,6 @@
 import numpy as np
+import pandas as pd
+
 
 def matriz_confusao(y_true, y_pred):
     """
@@ -37,9 +39,9 @@ def calcular_metricas(y_verdadeiro, y_previsto):
                    [fn, vp]]
     }
 
-def imprimir_relatorio(y_verdadeiro, y_previsto, k_usado):
+def imprimir_relatorio_knn(y_verdadeiro, y_previsto, k_usado):
     """
-    Função auxiliar para imprimir os resultados de forma bonita no terminal.
+    Função auxiliar para imprimir os resultados no terminal.
     """
     resultados = calcular_metricas(y_verdadeiro, y_previsto)
 
@@ -55,3 +57,28 @@ def imprimir_relatorio(y_verdadeiro, y_previsto, k_usado):
     print(f"Recall:    {resultados['Recall']:.4f}")
     print(f"F1-Score:  {resultados['F1-Score']:.4f}")
     print(f"{'='*40}\n")
+
+def imprimir_relatorio_kmeans(modelo_kmeans, clusters_atribuidos, y_verdadeiro, colunas_features):
+    """
+    Imprime as estatísticas dos centroides e a tabela cruzada de acertos do k-Means.
+    """
+    print("\nPerfil dos Centroides (Top 5 estatísticas normalizadas):")
+    for i, centroide in enumerate(modelo_kmeans.centroides):
+        print(f"\n  [Cluster {i}]")
+        estatisticas_centroide = pd.Series(centroide, index=colunas_features)
+        top_5 = estatisticas_centroide.sort_values(ascending=False).head(5)
+        for col, val in top_5.items():
+            print(f"  - {col}: {val:.4f}")
+
+    print("\nRelação entre os Clusters criados e a Realidade (TARGET_5Yrs):")
+    df_relacao = pd.DataFrame({'Cluster_KMeans': clusters_atribuidos, 'Realidade': y_verdadeiro})
+    
+    tabela_cruzada = pd.crosstab(
+        df_relacao['Cluster_KMeans'], 
+        df_relacao['Realidade'], 
+        rownames=['K-Means agrupou como:'], 
+        colnames=['Durou 5 Anos? (0=Não, 1=Sim)']
+    )
+    print("-" * 40)
+    print(tabela_cruzada)
+    print("-" * 40 + "\n")
