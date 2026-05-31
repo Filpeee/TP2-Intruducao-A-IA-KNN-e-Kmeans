@@ -8,7 +8,7 @@ class KmeansClusterizador:
         max_iteracoes: Limite de repetições para evitar loops infinitos caso não convirja.
         """
         self.k = k
-        self.max_iter = max_iteracoes
+        self.max_iteracoes = max_iteracoes
         self.centroides = None
 
     def _calcular_distancia(self, x1, x2):
