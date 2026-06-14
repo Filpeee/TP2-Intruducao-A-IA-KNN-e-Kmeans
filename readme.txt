@@ -10,11 +10,11 @@ As dependencias do projeto estao listadas no arquivo requirements.txt. Para inst
 pip install -r requirements.txt
 
 2. ESTRUTURA DE PASTAS
-O projeto espera que os arquivos de dados (nba_treino.csv e nba_teste.csv) estejam localizados dentro de uma pasta chamada "data/" na raiz do repositorio.
+O projeto espera que os arquivos de dados (nba_treino.csv e nba_teste.csv) estejam localizados dentro de uma pasta chamada "data/" sentro da pasta do projeto.
 Os codigos fonte estao localizados na pasta "src/".
 
 3. COMO EXECUTAR A IMPLEMENTACAO MANUAL (DO ZERO)
-Para rodar a implementacao manual do kNN e do k-Means (com normalizacao, treino, previsao e exibicao das metricas), abra o terminal na raiz do repositorio e execute:
+Para rodar a implementacao manual do kNN e do k-Means (com normalizacao, treino, previsao e exibicao das metricas), abra o terminal na raiz do projeto e execute:
 python src/main.py
 
 4. COMO EXECUTAR A COMPARACAO COM O SCIKIT-LEARN
